@@ -24,9 +24,14 @@ public class OrderController {
 
     private OrderRepository orderRepo;
 
+    private OrderProperties props;
+
     @Autowired
-    public OrderController(OrderRepository orderRepo) {
+    public OrderController(
+            OrderRepository orderRepo,
+            OrderProperties props) {
         this.orderRepo = orderRepo;
+        this.props = props;
     }
 
     @GetMapping("/current")
@@ -49,5 +54,17 @@ public class OrderController {
         sessionStatus.setComplete();
 
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+
+        log.warn("Current property page size is " + props.getPageSize());
+        log.info("using page size " + props.getPageSize());
+/*        Pageable pageable = PageRequest.of(0, props.getPageSize());
+         model.addAttribute("orders",
+                orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        return "orderList";*/
+        return "/";
     }
 }

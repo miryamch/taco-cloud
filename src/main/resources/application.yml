@@ -1,0 +1,21 @@
+taco:
+  orders:
+    pageSize: 10
+
+spring:
+  datasource:
+    initialization-mode: always
+    url: jdbc:h2:mem:testdb
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  profiles:
+    active: dev
+
+logging:
+  file:
+    name: TacoCloud.log
+  level:
+    org.springframework.security: DEBUG
